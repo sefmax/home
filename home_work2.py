@@ -1,4 +1,4 @@
-inp = int(input('ENTER: '))
+inp = int(input('ENTER number, must be between 0 and 8639999: '))
 
 if 0 <= inp < 8640000:
     day = inp // (24 * 60 *60)

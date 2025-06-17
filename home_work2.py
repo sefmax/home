@@ -6,7 +6,7 @@ if 0 <= inp < 8640000:
     mins = inp // 60 % 60
     sec = inp % 60
 
-    if day == 1:
+    if day % 10 == 1 and day // 10 != 1:
         day_word = 'день'
     elif 2 <= day % 10 <= 4 and not 12 <= day % 100 <= 14:
         day_word = 'дні'

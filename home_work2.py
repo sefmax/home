@@ -1,5 +1,5 @@
 def difference_numb(*numbers):
-    if numbers == ():
+    if not numbers:
         result = 0
 
     else:

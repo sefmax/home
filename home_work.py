@@ -1,9 +1,5 @@
-def popular_words (text, *words):
-    new_text = text.lower().split()
-    result = {}
-
-    for word in words:
-        check = new_text.count(word.lower())
-        result[word.lower()] = check
-
-    return result
+def is_even(num):
+    if int(num) % 2 == 0:
+        return True
+    else:
+        return False

@@ -6,8 +6,3 @@ def prime_generator(end):
                     break
             else:
                 yield num
-
-
-
-
-

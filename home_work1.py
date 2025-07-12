@@ -1,66 +1,51 @@
-class Person:
-    def __init__(self, name, surname, age):
-        self.name = name
-        self.surname = surname
+class Human:
+    def __init__(self, gender, age, first_name, last_name):
+        self.gender = gender
         self.age = age
-
-    def get_info(self):
-        return f"Name: {self.name}, Surname: {self.surname}, Age: {self.age}"
-
-
-class Student(Person):
-    def __init__(self, name, surname, age, student_id):
-        super().__init__(name, surname, age)
-        self.student_id = student_id
-
-    def get_info(self):
-        return f"Student: {self.name} {self.surname}, Age: {self.age}, ID: {self.student_id}"
+        self.first_name = first_name
+        self.last_name = last_name
 
     def __str__(self):
-        return self.get_info()
+        return f"{self.first_name} {self.last_name}, {self.age} y.o., {self.gender}"
+
+
+class Student(Human):
+    def __init__(self, gender, age, first_name, last_name, record_book):
+        super().__init__(gender, age, first_name, last_name)
+        self.record_book = record_book
+
+    def __str__(self):
+        return f"{super().__str__()}, Record Book: {self.record_book}"
+
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            return self.record_book == other.record_book
+        return False
+
+    def __hash__(self):
+        return hash(self.record_book)
 
 
 class Group:
-    def __init__(self):
-        self.students = []
+    def __init__(self, number):
+        self.number = number
+        self.group = set()
 
     def add_student(self, student):
         if isinstance(student, Student):
-            self.students.append(student)
+            self.group.add(student)
 
-    def find_student_by_surname(self, surname):
-        for student in self.students:
-            if student.surname == surname:
+    def find_student(self, last_name):
+        for student in self.group:
+            if student.last_name == last_name:
                 return student
         return None
 
-    def remove_student_by_surname(self, surname):
-        student = self.find_student_by_surname(surname)
+    def delete_student(self, last_name):
+        student = self.find_student(last_name)
         if student:
-            self.students.remove(student)
+            self.group.remove(student)
 
     def __str__(self):
-        if not self.students:
-            return "The group is empty."
-        return "\n".join(str(student) for student in self.students)
-
-
-# Example usage:
-if __name__ == "__main__":
-    student1 = Student("John", "Smith", 20, "S001")
-    student2 = Student("Emily", "Johnson", 21, "S002")
-
-    group = Group()
-    group.add_student(student1)
-    group.add_student(student2)
-
-    print("Group after adding students:")
-    print(group)
-
-    print("\nSearching for student with surname 'Smith':")
-    found = group.find_student_by_surname("Smith")
-    print(found.get_info() if found else "Student not found.")
-
-    group.remove_student_by_surname("Smith")
-    print("\nGroup after removing student with surname 'Smith':")
-    print(group)
+        all_students = '\n'.join(str(student) for student in self.group)
+        return f'Number: {self.number}\n{all_students}'

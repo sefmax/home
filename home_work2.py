@@ -70,7 +70,7 @@ if __name__ == "__main__":
         extra_student = Student("Female", 22, "Jane", "Doe", "RB11")
         group.add_student(extra_student)
     except GroupFullException as e:
-        print("❌ Exception caught:", e)
+        print("Exception caught:", e)
 
-    print("\n✅ Current group:")
+    print("\nCurrent group:")
     print(group)
